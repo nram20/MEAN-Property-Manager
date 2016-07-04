@@ -1,0 +1,112 @@
+<div class="container">
+  <div class="row">
+
+    <button ng-click="showForm()" class="pull-left btn btn-success btn-lg">+</button>
+  </div>
+
+  <div class="row">
+    <form ng-show='form'>
+      <h1>Add NEW Property</h1>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label id='topLabel' for="aptNum">Property Number</label>
+        <input ng-model="new.aptNum" type="number" min=1 max=300 class="form-control" id="aptNum" placeholder="Number" required>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="imgUrl">Image URL</label>
+        <input ng-model="new.imageUrl" type="text" class="form-control" id="imgUrl" placeholder="URL" required>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="beds">Number of Bedrooms</label>
+        <input ng-model="new.bedroom" type="number" min=1 value=1 class="form-control" id="beds" placeholder="1" required>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="baths">Number of Bathrooms</label>
+        <input ng-model="new.bathroom" type="number" min=1 value=1 class="form-control" id="baths" placeholder="1" required>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="price">Rent per Month</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input ng-model="new.price" type="text" min=1 value=1 class="form-control" id="price" placeholder="1" required>
+        </div>
+      </div>
+      <!-- <div class="form-group col-xs-12 col-lg-6">
+        <label for="vacancy">Availability</label>
+        <select required ng-model="new.vacancy" class="form-control">
+          <option value="Vacancy">Vacancy</option>
+          <option value="No Vacancy">No Vacancy</option>
+        </select>
+      </div> -->
+      <button ng-click="postNew()" class="btn basic">Add</button>
+    </form>
+  </div>
+
+  <div class="row">
+    <form ng-show='editForm'>
+      <h1>Edit Room {{ edit.aptNum }}</h1>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label id='topLabel' for="aptNum">Apartment Number</label>
+        <input ng-model="edit.aptNum" type="number" min=1 max=300 class="form-control" id="aptNum" placeholder="Number" required>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="imgUrl">Image URL</label>
+        <input ng-model="edit.imageUrl" type="text" class="form-control" id="imgUrl" placeholder="URL" required>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="beds">Number of Bedrooms</label>
+        <input ng-model="edit.bedroom" type="number" min=1 value=1 class="form-control" id="beds" placeholder="1" required>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="baths">Number of Bathrooms</label>
+        <input ng-model="edit.bathroom" type="number" min=1 value=1 class="form-control" id="baths" placeholder="1" required>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="price">Rent per Month</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input ng-model="edit.price" type="text" min=1 value=1 class="form-control" id="price" placeholder="1" required>
+        </div>
+      </div>
+      <div class="form-group col-xs-12 col-lg-6">
+        <label for="vacancy">Availability</label>
+        <select required ng-model="edit.vacancy" class="form-control">
+          <option value="Vacancy">Vacancy</option>
+          <option value="No Vacancy">No Vacancy</option>
+        </select>
+      </div>
+      <button ng-click="deleteProp(edit._id)" class="btn btn-danger">Delete Prop</button>
+      <button ng-click="postEdit(edit._id)" class="btn basic">Save</button>
+    </form>
+  </div>
+
+
+  <div class='row'>
+    <div class="sort">
+      Sort By:
+      <span class="unsortLink" ng-click="unSort()">(Click here to unsort)</span><span class="sorts"
+      ng-repeat="obj in BandB"
+      ng-click="sortBy(obj.bedroom, obj.bathroom)">
+      Bed: {{obj.bedroom}} Bath: {{obj.bathroom}}</span>
+    </div>
+
+    <div class="box col-xs-12 col-lg-4" ng-repeat="prop in props">
+      <div class="aptNum" ng-click='editProp(prop)'>
+        #{{ prop.aptNum }}
+        <small>Click Number to Edit/Click Image for Details</small>
+      </div>
+      <img class='props'  ui-sref='propertyDetail({id: prop._id})' ng-src="{{prop.imageUrl}}">
+      <div class="info">
+        <span class="left">{{ prop.vacancy }}</span>
+        <span class="pull-right">{{ prop.bedroom }} Br</span>
+      </div>
+      <div class="info">
+        <span class="left">{{ prop.price | currency }}/Month</span>
+        <span class="pull-right">{{ prop.bathroom }} Ba</span>
+      </div>
+    </div>
+
+
+
+    </div>
+  </div>
+</div>

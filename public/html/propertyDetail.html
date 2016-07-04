@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="detailName col-xs-10 col-xs-offset-2">#{{ prop.aptNum }}</div>
+  </div>
+
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-2">
+
+          <div class="big-box">
+            <img class='detailImage' ng-src="{{prop.imageUrl}}">
+            <div class="detailInfo">
+              <span class="detailLeft">{{ prop.vacancy }}</span>
+              <span class="pull-right">{{ prop.bedroom }} Br</span>
+            </div>
+            <div class="detailInfo">
+              <span class="detailLeft">{{ prop.price | currency }}/Month</span>
+              <span class="pull-right">{{ prop.bathroom }} Ba</span>
+            </div>
+            <span class="detailTenant">Tenants:</span>
+            <span class="tenantName" ng-repeat='tenant in prop.tenants'>{{ tenant.name }}</span class="tenantName">
+            <span ng-show="showForm">
+              <label class="tenantAdd" for="exampleInputName2">Name</label>
+              <select ng-model="selectedTenantId">
+                <option ng-repeat="client in potential" ng-value="client._id">{{client.name}}</option>
+              </select>
+            </span>
+           <!--  <pre>{{$scope | json}}</pre> -->
+          <button ng-hide="showForm" ng-if="potential.length" class="btn btn-default pull-right" ng-click="openForm()">Add Tenant</button>
+          <button ng-show="showForm" class="btn btn-primary pull-right" ng-click="saveTenant()">Save</button>
+          <span ng-if="!potential.length" class="btn btn-default pull-right">No More Clients!</span>
+          </div>
+
+
+
+      </div>
+  </div>
+</div>
+
+
